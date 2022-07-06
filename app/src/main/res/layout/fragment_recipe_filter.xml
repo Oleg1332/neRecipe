@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/app_padding"
+    tools:context=".recipe_view_fragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <TextView
+        style="@style/section_title"
+        android:text="@string/category" />
+
+    </FrameLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="10dp" />
+
+    <CheckBox
+        android:id="@+id/checkbox_eu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/european" />
+    <CheckBox
+        android:id="@+id/checkbox_as"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/asian" />
+    <CheckBox
+        android:id="@+id/checkbox_na"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/american" />
+    <CheckBox
+        android:id="@+id/checkbox_ru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/russian" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="@dimen/app_padding" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCreateRecipe"
+        style="@style/fullWidthButton"
+        android:text="@string/set_filter" />
+
+</LinearLayout>

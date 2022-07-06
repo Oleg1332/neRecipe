@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/recipeCreationFragment"
+        android:name="ru.netology.nerecipes.fragments.RecipeCreationFragment"
+        android:label="RecipeCreationFragment"
+        tools:layout="@layout/fragment_recipe_creation">
+        <argument
+            android:name="currentRecipe"
+            app:argType="ru.netology.nerecipes.data.Recipe"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="ru.netology.nerecipes.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/activity_main">
+        <action
+            android:id="@+id/action_mainFragment_to_recipeCreationFragment"
+            app:destination="@id/recipeCreationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_mainFragment_to_recipeFilterFragment"
+            app:destination="@id/recipeFilterFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_mainFragment_to_recipe_view_fragment"
+            app:destination="@id/recipeViewFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+    </fragment>
+    <fragment
+        android:id="@+id/recipeViewFragment"
+        android:name="ru.netology.nerecipes.fragments.RecipeViewFragment"
+        android:label="fragment_recipe_filter"
+        tools:layout="@layout/fragment_recipe_view_fragment" >
+        <argument
+            android:name="recipeCardId"
+            app:argType="long"
+            app:nullable="false" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/recipeFilterFragment"
+        android:name="ru.netology.nerecipes.fragments.RecipeFilterFragment"
+        android:label="RecipeFilterFragment"
+        tools:layout="@layout/fragment_recipe_filter"
+        app:enterAnim="@android:anim/fade_in"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@android:anim/fade_out">
+
+    </fragment>
+    <fragment
+        android:id="@+id/editingRecipeFragment"
+        android:name="ru.netology.nerecipes.fragments.EditingRecipeFragment"
+        android:label="editing_recipe_fragment"
+        tools:layout="@layout/editing_recipe_fragment">
+
+    </fragment>
+</navigation>
