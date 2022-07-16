@@ -1,37 +1,30 @@
 package ru.netology.nerecipes.impl
 
 import androidx.lifecycle.MutableLiveData
+import ru.netology.nerecipes.data.Category
 import ru.netology.nerecipes.data.Recipe
 import ru.netology.nerecipes.data.RecipeRepository
 
 class InMemoryRecipeRepository : RecipeRepository {
-    private var nextId = 1L
-    private var recipes = listOf(
+    override val data = MutableLiveData(
+        List(GENERATED_RECIPES_AMOUNT) { index ->
             Recipe(
-                id = nextId++,
-                author = "Me",
-                category = "Russian",
-                name = "ris",
-                description = "horoshiy",
-                time = "24 min",
-                recipe = "svarit' ris",
-                fav = false,
-                picture = ""
-            ),
-        Recipe(
-            id = nextId++,
-            author = "Me",
-            category = "Asian",
-            name = "ris",
-            description = "ochen' horoshiy",
-            time = "56 min",
-            recipe = "pozharit' ris",
-            fav = false,
-            picture = ""
-        )
+                id = index + 1L,
+                author = "Oleg",
+                name = "plov",
+                recipe = "Some random content $index",
+                description = "something",
+                category = Category.Asian,
+                time = "34min"
+            )
+        }
     )
-    override val data = MutableLiveData(recipes)
 
+    private var nextId = GENERATED_RECIPES_AMOUNT.toLong()
+
+    private val recipes get() = checkNotNull(data.value) {
+        "Data value should not be null"
+    }
 
     override fun favorite(recipeId: Long) {
         data.value = recipes.map {
@@ -41,8 +34,7 @@ class InMemoryRecipeRepository : RecipeRepository {
     }
 
     override fun delete(recipeId: Long) {
-        recipes =
-            recipes.filter { it.id != recipeId }
+        data.value = recipes.filter { it.id != recipeId }
         data.value = recipes
     }
 
@@ -51,15 +43,14 @@ class InMemoryRecipeRepository : RecipeRepository {
     }
 
     private fun update(recipe: Recipe) {
-        recipes = recipes.map {
+        data.value = recipes.map {
             if (it.id == recipe.id) recipe else it
         }
         data.value = recipes
     }
 
     private fun insert(recipe: Recipe) {
-        recipes =
-            listOf(
+        data.value = listOf(
                 recipe.copy(
                     id = nextId++
                 )
@@ -77,4 +68,14 @@ class InMemoryRecipeRepository : RecipeRepository {
         data.value = recipes
     }
 
+    override fun getCategory(category: Category) {
+        recipes.find {
+            it.category == category
+        }
+        data.value = recipes
+    }
+
+    private companion object {
+        const val GENERATED_RECIPES_AMOUNT = 1000
+    }
 }

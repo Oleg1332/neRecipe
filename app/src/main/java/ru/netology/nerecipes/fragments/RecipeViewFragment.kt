@@ -32,7 +32,7 @@ class RecipeViewFragment : Fragment() {
             viewHolder.bind(detailedRecipe)
             binding.recipeDetail.text = detailedRecipe.recipe
             binding.recipeDetailDescription.text = detailedRecipe.description
-            binding.recipeDetailTime.text = detailedRecipe.time
+            binding.textTime.text = detailedRecipe.time
             binding.recipeDetailName.text = detailedRecipe.name
             binding.recipeDetailImage.setImageResource(R.drawable.ic_test)
 

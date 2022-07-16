@@ -42,6 +42,16 @@
         app:srcCompat="@drawable/ic_add_24"
         tools:ignore="ImageContrastCheck" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/filterButton"
+        android:layout_width="55dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        app:icon="@drawable/ic_filter_24"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="@+id/bottom_navigation" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -49,13 +59,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
-
-
-    <FrameLayout
-        android:id="@+id/recipeFragmentHolder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

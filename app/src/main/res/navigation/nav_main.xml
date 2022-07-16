@@ -19,7 +19,7 @@
         android:id="@+id/mainFragment"
         android:name="ru.netology.nerecipes.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/activity_main">
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_recipeCreationFragment"
             app:destination="@id/recipeCreationFragment"
@@ -64,11 +64,5 @@
         app:popExitAnim="@android:anim/fade_out">
 
     </fragment>
-    <fragment
-        android:id="@+id/editingRecipeFragment"
-        android:name="ru.netology.nerecipes.fragments.EditingRecipeFragment"
-        android:label="editing_recipe_fragment"
-        tools:layout="@layout/editing_recipe_fragment">
 
-    </fragment>
 </navigation>

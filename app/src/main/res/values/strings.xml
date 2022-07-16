@@ -34,4 +34,6 @@
     <string name="open_filter">Open filter</string>
     <string name="menu">menu</string>
     <string name="remove_big">Remove</string>
+    <string name="cancel">cancel</string>
+    <string name="time">Time:</string>
 </resources>

@@ -67,37 +67,27 @@
                 android:id="@+id/recipeDetailTime"
                 style="@style/section_title"
                 android:textSize="@dimen/default_text_size"
-                tools:text="Time: 1h" />
+                android:text="@string/time" />
+            <TextView
+                android:id="@+id/textTime"
+                style="@style/section_title"
+                android:textSize="16sp"
+                tools:text="13"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/app_padding" />
+
 
             <TextView
                 style="@style/section_title"
                 android:text="@string/category" />
 
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="@dimen/app_padding" />
-
-            <CheckBox
-                android:id="@+id/checkbox_eu"
+            <TextView
+                android:id="@+id/recipeCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/european" />
-            <CheckBox
-                android:id="@+id/checkbox_as"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/asian" />
-            <CheckBox
-                android:id="@+id/checkbox_na"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/american" />
-            <CheckBox
-                android:id="@+id/checkbox_ru"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/russian" />
+                tools:text="one random category"/>
 
             <Space
                 android:layout_width="0dp"
@@ -114,7 +104,7 @@
 
 
             <TextView
-                android:id="@+id/recipe_detail"
+                android:id="@+id/recipeDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="one random recipe"/>

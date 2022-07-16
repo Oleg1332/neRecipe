@@ -10,6 +10,7 @@ interface RecipeRepository {
     fun save(recipe: Recipe)
     fun search(recipeName: String)
     fun getAllRecipes()
+    fun getCategory(category: Category)
     companion object {
         const val NEW_RECIPE_ID = 0L
     }

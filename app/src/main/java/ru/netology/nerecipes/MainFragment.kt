@@ -12,8 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nerecipes.adapter.RecipesAdapter
 import ru.netology.nerecipes.data.Recipe
-import ru.netology.nerecipes.databinding.ActivityMainBinding
-import ru.netology.nerecipes.fragments.EditingRecipeFragment
+import ru.netology.nerecipes.databinding.MainFragmentBinding
+import ru.netology.nerecipes.fragments.RecipeCreationFragment
 import ru.netology.nerecipes.viewModel.RecipeViewModel
 
 class MainFragment : Fragment() {
@@ -33,16 +33,21 @@ class MainFragment : Fragment() {
             val direction = MainFragmentDirections.actionMainFragmentToRecipeCreationFragment(recipe)
             findNavController().navigate(direction)
         }
+        viewModel.navigateToRecipeFilterFragmentEvent.observe(this) {
+            val direction =
+                MainFragmentDirections.actionMainFragmentToRecipeFilterFragment()
+            findNavController().navigate(direction)
+        }
     }
 
     override fun onResume() {
         super.onResume()
         setFragmentResultListener(
-            requestKey = EditingRecipeFragment.REQUEST_KEY
+            requestKey = RecipeCreationFragment.REQUEST_KEY
         ) { requestKey, bundle ->
-            if (requestKey != EditingRecipeFragment.REQUEST_KEY) return@setFragmentResultListener
+            if (requestKey != RecipeCreationFragment.REQUEST_KEY) return@setFragmentResultListener
             val newRecipe = bundle.getParcelable<Recipe>(
-                EditingRecipeFragment.RESULT_KEY
+                RecipeCreationFragment.RESULT_KEY
             ) ?: return@setFragmentResultListener
             viewModel.onSaveButtonClicked(newRecipe)
         }
@@ -51,7 +56,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = ActivityMainBinding.inflate(layoutInflater, container, false).also { binding ->
+    ) = MainFragmentBinding.inflate(layoutInflater, container, false).also { binding ->
         val adapter = RecipesAdapter(viewModel)
         binding.recipesRecyclerView.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { recipes ->
@@ -59,6 +64,9 @@ class MainFragment : Fragment() {
         }
         binding.fab.setOnClickListener {
             viewModel.onAddButtonClicked()
+        }
+        binding.filterButton.setOnClickListener {
+            viewModel.onFilterClicked()
         }
 
         val searchItem = binding.search

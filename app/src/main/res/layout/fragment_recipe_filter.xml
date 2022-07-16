@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/app_padding"
-    tools:context=".recipe_view_fragment">
+    tools:context=".fragments.RecipeFilterFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
         android:layout_height="@dimen/app_padding" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCreateRecipe"
+        android:id="@+id/btnSetFilter"
         style="@style/fullWidthButton"
         android:text="@string/set_filter" />
 

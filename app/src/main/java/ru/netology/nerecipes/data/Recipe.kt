@@ -1,30 +1,32 @@
 package  ru.netology.nerecipes.data
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Parcelize
 data class Recipe(
     val id: Long,
     val author: String,
-    val category: String,
+    val category: Category,
     val name: String,
     val description: String,
     val time: String,
     val recipe: String,
     val fav: Boolean = false,
     val picture: String = ""
-) : Parcelable {
+) : Parcelable
 
+    @Serializable
     @Parcelize
     enum class Category(
-        val key: String,
-        val isChosen: Boolean = true
+        val label: String
     ) : Parcelable {
-        European("Европейская",true),
-        Asian("Азиатская",true),
-        American("Американская",true),
-        Russian("Русская",true)
+        European("European".toString()),
+        Asian("Asian".toString()),
+        American("American".toString()),
+        Russian("Russian".toString())
     }
-}
 
-annotation class Parcelize
+
+
