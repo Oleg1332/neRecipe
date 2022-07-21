@@ -8,6 +8,7 @@ import ru.netology.nerecipes.adapter.RecipeInteractionListener
 import ru.netology.nerecipes.data.Category
 import ru.netology.nerecipes.data.Recipe
 import ru.netology.nerecipes.data.RecipeRepository
+import ru.netology.nerecipes.databinding.FragmentRecipeFilterBinding
 import ru.netology.nerecipes.impl.SharedPrefsRecipeRepository
 
 
@@ -83,6 +84,28 @@ class RecipeViewModel (
 
     fun showRecipesByCategories(category: Category) {
         repository.getCategory(category)
+    }
+    lateinit var binding: FragmentRecipeFilterBinding
+
+    fun onSetFilterClicked(categoryList: ArrayList<Category>): List<Category> {
+
+        if (binding.checkboxEu.isChecked) {
+            showRecipesByCategories(Category.European)
+            categoryList.add(Category.European)
+        }
+        if (binding.checkboxAs.isChecked) {
+            showRecipesByCategories(Category.Asian)
+            categoryList.add(Category.Asian)
+        }
+        if (binding.checkboxNa.isChecked) {
+            showRecipesByCategories(Category.American)
+            categoryList.add(Category.American)
+        }
+        if (binding.checkboxRu.isChecked) {
+            showRecipesByCategories(Category.Russian)
+            categoryList.add(Category.Russian)
+        }
+        return categoryList
 
     }
 }

@@ -11,9 +11,11 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nerecipes.adapter.RecipesAdapter
+import ru.netology.nerecipes.data.Category
 import ru.netology.nerecipes.data.Recipe
 import ru.netology.nerecipes.databinding.MainFragmentBinding
 import ru.netology.nerecipes.fragments.RecipeCreationFragment
+import ru.netology.nerecipes.fragments.RecipeFilterFragment
 import ru.netology.nerecipes.viewModel.RecipeViewModel
 
 class MainFragment : Fragment() {
@@ -67,6 +69,15 @@ class MainFragment : Fragment() {
         }
         binding.filterButton.setOnClickListener {
             viewModel.onFilterClicked()
+        }
+        setFragmentResultListener(
+            requestKey = RecipeFilterFragment.REQUEST_KEY
+        ) { requestKey, bundle ->
+            if (requestKey != RecipeFilterFragment.REQUEST_KEY) return@setFragmentResultListener
+            val category = bundle.getParcelableArrayList<Category>(
+                RecipeFilterFragment.RESULT_KEY
+            ) ?: return@setFragmentResultListener
+            viewModel.onSetFilterClicked(category)
         }
 
         val searchItem = binding.search

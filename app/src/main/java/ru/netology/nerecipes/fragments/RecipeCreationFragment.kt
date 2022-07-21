@@ -69,11 +69,19 @@ class RecipeCreationFragment : Fragment() {
             description = binding.txtRecipeDescriptionInput.text.toString(),
             recipe = binding.recipeEnterField.text.toString(),
             time = binding.txtTimeInput.text.toString(),
-            category = Category.Asian,
+            category = getCategory(binding.categoryRecipeCheckbox.checkedRadioButtonId),
             author = "Me"
         )
     recipeCreationViewModel.onCancelClicked(currentRecipe)
     findNavController().navigateUp()
+    }
+
+    fun getCategory(checkedId: Int) = when (checkedId) {
+        R.id.checkboxEu -> Category.European
+        R.id.checkboxAs -> Category.Asian
+        R.id.checkboxNa -> Category.American
+        R.id.checkboxRu -> Category.Russian
+        else -> throw IllegalArgumentException("Unknown type: $checkedId")
     }
 
     private fun onOkButtonClicked(binding: FragmentRecipeCreationBinding) {
@@ -83,7 +91,7 @@ class RecipeCreationFragment : Fragment() {
             description = binding.txtRecipeDescriptionInput.text.toString(),
             recipe = binding.recipeEnterField.text.toString(),
             time = binding.txtTimeInput.text.toString(),
-            category = Category.Asian,
+            category = getCategory(binding.categoryRecipeCheckbox.checkedRadioButtonId),
             author = "Me"
         )
         if (emptyFieldsCheck(recipe = currentRecipe)) {
@@ -97,7 +105,6 @@ class RecipeCreationFragment : Fragment() {
     private fun emptyFieldsCheck(recipe: Recipe): Boolean {
         return if (recipe.name.isBlank()
             || recipe.recipe.isBlank()
-            //|| recipe.category.isBlank()
             || recipe.description.isBlank()
             || recipe.time.isBlank()
         ) {

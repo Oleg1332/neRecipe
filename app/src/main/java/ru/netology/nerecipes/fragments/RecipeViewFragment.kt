@@ -26,7 +26,7 @@ class RecipeViewFragment : Fragment() {
             RecipesAdapter.ViewHolder(binding.recipeView, recipeViewFragmentViewModel)
         recipeViewFragmentViewModel.data.observe(viewLifecycleOwner) { recipes ->
             val detailedRecipe = recipes.find { it.id == args.recipeCardId } ?: run {
-                findNavController().navigateUp() // рецепт был удален
+                findNavController().navigateUp()
                 return@observe
             }
             viewHolder.bind(detailedRecipe)
@@ -34,6 +34,7 @@ class RecipeViewFragment : Fragment() {
             binding.recipeDetailDescription.text = detailedRecipe.description
             binding.textTime.text = detailedRecipe.time
             binding.recipeDetailName.text = detailedRecipe.name
+            binding.recipeCategory.text = detailedRecipe.category.toString()
             binding.recipeDetailImage.setImageResource(R.drawable.ic_test)
 
         }

@@ -35,27 +35,27 @@ class RecipeFilterFragment : Fragment() {
         }
     }.root
 
-    private fun onOkButtonClicked(binding: FragmentRecipeFilterBinding) {
-        var checkedCount = 0
-        val numberOfFilters = 7
+    private fun onOkButtonClicked(binding: FragmentRecipeFilterBinding): ArrayList<Category> {
+        val categoryList = arrayListOf<Category>()
 
-        if (!binding.checkboxEu.isChecked) {
-            ++checkedCount
+        if (binding.checkboxEu.isChecked) {
             categoryFilterViewModel.showRecipesByCategories(Category.European)
+            categoryList.add(Category.European)
         }
-        if (!binding.checkboxAs.isChecked) {
-            ++checkedCount
+        if (binding.checkboxAs.isChecked) {
             categoryFilterViewModel.showRecipesByCategories(Category.Asian)
+            categoryList.add(Category.Asian)
         }
-        if (!binding.checkboxNa.isChecked) {
-            ++checkedCount
+        if (binding.checkboxNa.isChecked) {
             categoryFilterViewModel.showRecipesByCategories(Category.American)
+            categoryList.add(Category.American)
         }
-        if (!binding.checkboxRu.isChecked) {
-            ++checkedCount
+        if (binding.checkboxRu.isChecked) {
             categoryFilterViewModel.showRecipesByCategories(Category.Russian)
+            categoryList.add(Category.Russian)
         }
         findNavController().popBackStack()
+        return categoryList
     }
 
 
