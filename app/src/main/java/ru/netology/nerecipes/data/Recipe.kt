@@ -1,4 +1,5 @@
 package  ru.netology.nerecipes.data
+
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
@@ -17,16 +18,14 @@ data class Recipe(
     val picture: String = ""
 ) : Parcelable
 
-    @Serializable
-    @Parcelize
-    enum class Category(
-        val label: String
-    ) : Parcelable {
-        European("European".toString()),
-        Asian("Asian".toString()),
-        American("American".toString()),
-        Russian("Russian".toString())
-    }
+@Serializable
+@Parcelize
+enum class Category : Parcelable {
+    European,
+    Asian,
+    American,
+    Russian
+}
 
 
 

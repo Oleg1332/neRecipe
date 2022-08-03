@@ -12,9 +12,9 @@ import ru.netology.nerecipes.data.Recipe
 import ru.netology.nerecipes.data.RecipeRepository
 import kotlin.properties.Delegates
 
-class SharedPrefsRecipeRepository (
+class SharedPrefsRecipeRepository(
     application: Application
-    ) : RecipeRepository {
+) : RecipeRepository {
 
     private val prefs = application.getSharedPreferences(
         "repo", Context.MODE_PRIVATE
@@ -22,22 +22,23 @@ class SharedPrefsRecipeRepository (
     override val data: MutableLiveData<List<Recipe>>
 
     init {
-        val serializedPosts = prefs.getString(RECIPES_PREFS_KEY, null)
-        val posts: List<Recipe> = if (serializedPosts != null) {
-            Json.decodeFromString(serializedPosts)
+        val serializedRecipes = prefs.getString(RECIPES_PREFS_KEY, null)
+        val posts: List<Recipe> = if (serializedRecipes != null) {
+            Json.decodeFromString(serializedRecipes)
         } else emptyList()
         data = MutableLiveData(posts)
     }
 
     private var nextId: Long by Delegates.observable(
         prefs.getLong(NEXT_ID_PREFS_KEY, 0L)
-    ) {_, _, newValue ->
-        prefs.edit { putLong(NEXT_ID_PREFS_KEY, newValue)}
+    ) { _, _, newValue ->
+        prefs.edit { putLong(NEXT_ID_PREFS_KEY, newValue) }
     }
 
-    private var recipes get() = checkNotNull(data.value) {
-        "Data value should not be null"
-    }
+    private var recipes
+        get() = checkNotNull(data.value) {
+            "Data value should not be null"
+        }
         set(value) {
             prefs.edit {
                 val serializedRecipes = Json.encodeToString(value)
@@ -47,10 +48,13 @@ class SharedPrefsRecipeRepository (
         }
 
     override fun favorite(recipeId: Long) {
-        data.value = recipes.map {
-            if (it.id != recipeId) it
-            else it.copy(fav = !it.fav)
-        }
+        recipes =
+            recipes.map {
+                if (it.id == recipeId)
+                    it.copy(fav = !it.fav)
+                else it
+            }
+        data.value = recipes
     }
 
     override fun delete(recipeId: Long) {
@@ -81,20 +85,21 @@ class SharedPrefsRecipeRepository (
     }
 
     override fun search(recipeName: String) {
-        recipes.find {
+        recipes.filter {
             it.name == recipeName
-        } ?: throw RuntimeException("Ничего не найдено")
+        }
         data.value = recipes
     }
 
-    override fun getAllRecipes() {
-        data.value = recipes
-    }
 
     override fun getCategory(category: Category) {
         recipes.find {
             it.category == category
         }
+        data.value = recipes
+    }
+
+    override fun update() {
         data.value = recipes
     }
 

@@ -83,6 +83,13 @@
         <item name="android:minHeight">32dp</item>
     </style>
 
+    <style name="Widget.AppTheme.Favorite" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="icon">@drawable/ic_favorite_24</item>
+        <item name="iconTint">@color/favorite_tint</item>
+        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
+    </style>
+
     <style name="text_full_width" parent="text">
         <item name="android:layout_width">match_parent</item>
     </style>

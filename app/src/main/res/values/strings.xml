@@ -36,4 +36,9 @@
     <string name="remove_big">Remove</string>
     <string name="cancel">cancel</string>
     <string name="time">Time:</string>
+    <string name="filterBar">Filter</string>
+    <string name="allBar">All</string>
+    <string name="favoritesBar">Favorites</string>
+    <string name="nothing_added">Nothing added</string>
+    <string name="cancel_filter">cancel filter</string>
 </resources>

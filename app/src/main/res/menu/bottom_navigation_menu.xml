@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
-        android:id="@+id/page_1"
-        android:enabled="true"
-        android:icon="@drawable/ic_favorite_24"
-        android:title="@string/favorites"/>
-    <item
-        android:id="@+id/page_2"
+        android:id="@+id/mainFragment"
         android:enabled="true"
         android:icon="@drawable/ic_book_24"
-        android:title="@string/all"/>
+        android:title="@string/allBar"/>
+
+    <item
+        android:id="@+id/favFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_favorite_24"
+        android:title="@string/favoritesBar"/>
+
+    <item
+        android:id="@+id/filterFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_filter_24"
+        android:title="@string/filterBar"/>
 
 </menu>

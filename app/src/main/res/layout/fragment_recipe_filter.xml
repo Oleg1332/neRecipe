@@ -1,56 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/app_padding"
-    tools:context=".fragments.RecipeFilterFragment">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+    android:layout_height="match_parent">
 
     <TextView
-        style="@style/section_title"
-        android:text="@string/category" />
-
-    </FrameLayout>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="10dp" />
-
-    <CheckBox
-        android:id="@+id/checkbox_eu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/european" />
+        android:text="@string/category"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/checkboxEu"
+        style="@style/text"/>
     <CheckBox
-        android:id="@+id/checkbox_as"
+        android:id="@+id/checkboxEu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/asian" />
+        android:layout_marginTop="40dp"
+        android:checked="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/european"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <CheckBox
-        android:id="@+id/checkbox_na"
+        android:id="@+id/checkboxAs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/american" />
+        android:checked="true"
+        android:text="@string/asian"
+        app:layout_constraintStart_toStartOf="@+id/checkboxEu"
+        app:layout_constraintTop_toBottomOf="@+id/checkboxEu" />
+
+
     <CheckBox
-        android:id="@+id/checkbox_ru"
+        android:id="@+id/checkboxNa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/russian" />
+        android:checked="true"
+        android:text="@string/american"
+        app:layout_constraintStart_toStartOf="@+id/checkboxAs"
+        app:layout_constraintTop_toBottomOf="@+id/checkboxAs" />
 
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="@dimen/app_padding" />
+    <CheckBox
+        android:id="@+id/checkboxRu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/russian"
+        app:layout_constraintStart_toStartOf="@+id/checkboxNa"
+        app:layout_constraintTop_toBottomOf="@+id/checkboxNa" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSetFilter"
-        style="@style/fullWidthButton"
-        android:text="@string/set_filter" />
 
-</LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/setFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/set_filter"
+        app:srcCompat="@drawable/ic_ok_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

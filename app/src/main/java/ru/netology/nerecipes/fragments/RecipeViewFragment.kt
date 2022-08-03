@@ -21,23 +21,24 @@ class RecipeViewFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentRecipeViewFragmentBinding.inflate(layoutInflater, container, false).also { binding ->
-        val viewHolder =
-            RecipesAdapter.ViewHolder(binding.recipeView, recipeViewFragmentViewModel)
-        recipeViewFragmentViewModel.data.observe(viewLifecycleOwner) { recipes ->
-            val detailedRecipe = recipes.find { it.id == args.recipeCardId } ?: run {
-                findNavController().navigateUp()
-                return@observe
+    ) = FragmentRecipeViewFragmentBinding.inflate(layoutInflater, container, false)
+        .also { binding ->
+            val viewHolder =
+                RecipesAdapter.ViewHolder(binding.recipeView, recipeViewFragmentViewModel)
+            recipeViewFragmentViewModel.data.observe(viewLifecycleOwner) { recipes ->
+                val detailedRecipe = recipes.find { it.id == args.recipeCardId } ?: run {
+                    findNavController().navigateUp()
+                    return@observe
+                }
+                viewHolder.bind(detailedRecipe)
+                binding.recipeDetail.text = detailedRecipe.recipe
+                binding.recipeDetailDescription.text = detailedRecipe.description
+                binding.textTime.text = detailedRecipe.time
+                binding.recipeDetailName.text = detailedRecipe.name
+                binding.recipeCategory.text = detailedRecipe.category.toString()
+                binding.recipeDetailImage.setImageResource(R.drawable.ic_test)
+
             }
-            viewHolder.bind(detailedRecipe)
-            binding.recipeDetail.text = detailedRecipe.recipe
-            binding.recipeDetailDescription.text = detailedRecipe.description
-            binding.textTime.text = detailedRecipe.time
-            binding.recipeDetailName.text = detailedRecipe.name
-            binding.recipeCategory.text = detailedRecipe.category.toString()
-            binding.recipeDetailImage.setImageResource(R.drawable.ic_test)
 
-        }
-
-    }.root
+        }.root
 }

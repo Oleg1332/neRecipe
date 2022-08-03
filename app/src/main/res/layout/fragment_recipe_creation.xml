@@ -15,9 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="150dp">
 
-            <com.google.android.material.button.MaterialButton
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/btnRecipeImage"
                 style="@style/icon_button"
+                android:src="@drawable/food"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -112,6 +113,7 @@
             android:id="@+id/checkboxAs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/asian" />
         <RadioButton
             android:id="@+id/checkboxNa"

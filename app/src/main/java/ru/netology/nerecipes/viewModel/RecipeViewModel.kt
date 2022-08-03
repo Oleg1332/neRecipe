@@ -3,27 +3,36 @@ package ru.netology.nerecipes.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import ru.netology.nerecipes.Util.SingleLiveEvent
 import ru.netology.nerecipes.adapter.RecipeInteractionListener
 import ru.netology.nerecipes.data.Category
 import ru.netology.nerecipes.data.Recipe
 import ru.netology.nerecipes.data.RecipeRepository
-import ru.netology.nerecipes.databinding.FragmentRecipeFilterBinding
 import ru.netology.nerecipes.impl.SharedPrefsRecipeRepository
 
 
-class RecipeViewModel (
+class RecipeViewModel(
     application: Application
 ) : AndroidViewModel(application), RecipeInteractionListener {
 
     private val repository: RecipeRepository = SharedPrefsRecipeRepository(application)
 
-    val data by repository::data
+    val data = repository.data.map { list ->
+        list.filter { categoriesFilter.contains(it.category) }
+    }
     val recipeViewEvent = SingleLiveEvent<Long>()
     val navigateToRecipeCreationFragmentEvent = SingleLiveEvent<Recipe?>()
-    val navigateToRecipeFilterFragmentEvent = SingleLiveEvent<Recipe?>()
     private val currentRecipe = MutableLiveData<Recipe?>(null)
-    val searchQuery: MutableLiveData<String> = MutableLiveData()
+    private var categoriesFilter: List<Category> = Category.values().toList()
+    var setCategoryFilter = false
+
+    var favoriteFilter: MutableLiveData<Boolean> = MutableLiveData()
+
+    init {
+        favoriteFilter.value = false
+    }
+
 
     fun onSaveButtonClicked(recipe: Recipe) {
         if (recipe.recipe.isBlank() && recipe.name.isBlank()) return
@@ -44,12 +53,11 @@ class RecipeViewModel (
         currentRecipe.value = null
     }
 
+
     fun onAddButtonClicked() {
         navigateToRecipeCreationFragmentEvent.call()
     }
-    fun onFilterClicked() {
-        navigateToRecipeFilterFragmentEvent.call()
-    }
+
     override fun onFavClicked(recipe: Recipe) {
         repository.favorite(recipe.id)
     }
@@ -74,38 +82,15 @@ class RecipeViewModel (
     override fun onRecipeItemClicked(recipe: Recipe) {
         navigateToRecipeCreationFragmentEvent.value = recipe
     }
+
     fun searchRecipe(recipeName: String) {
         repository.search(recipeName)
     }
 
-    fun clearFilter() {
-        repository.getAllRecipes()
+    fun showRecipesByCategories(categories: List<Category>) {
+        categoriesFilter = categories
+        repository.update()
     }
 
-    fun showRecipesByCategories(category: Category) {
-        repository.getCategory(category)
-    }
-    lateinit var binding: FragmentRecipeFilterBinding
 
-    fun onSetFilterClicked(categoryList: ArrayList<Category>): List<Category> {
-
-        if (binding.checkboxEu.isChecked) {
-            showRecipesByCategories(Category.European)
-            categoryList.add(Category.European)
-        }
-        if (binding.checkboxAs.isChecked) {
-            showRecipesByCategories(Category.Asian)
-            categoryList.add(Category.Asian)
-        }
-        if (binding.checkboxNa.isChecked) {
-            showRecipesByCategories(Category.American)
-            categoryList.add(Category.American)
-        }
-        if (binding.checkboxRu.isChecked) {
-            showRecipesByCategories(Category.Russian)
-            categoryList.add(Category.Russian)
-        }
-        return categoryList
-
-    }
 }

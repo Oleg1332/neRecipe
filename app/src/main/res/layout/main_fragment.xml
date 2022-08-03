@@ -7,13 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/search"
-        tools:ignore="MissingConstraints" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipesRecyclerView"
         android:layout_width="match_parent"
@@ -22,14 +15,13 @@
         app:layout_constraintTop_toBottomOf="@id/search"
         tools:listitem="@layout/recipe" />
 
-
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/toolsTop"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="bottom_navigation" />
+        android:hint="@string/search"
+        tools:ignore="MissingConstraints" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -37,27 +29,23 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:contentDescription="@string/adding_recipe"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_24"
-        tools:ignore="ImageContrastCheck" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/filterButton"
-        android:layout_width="55dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="32dp"
-        app:icon="@drawable/ic_filter_24"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintStart_toStartOf="@+id/bottom_navigation" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/cancel_filter"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:srcCompat="@drawable/ic_back_24" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,7 @@
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_test" />
+            app:srcCompat="@drawable/food" />
 
         <LinearLayout
             android:id="@+id/typeList"
@@ -56,13 +56,15 @@
             style="@style/recipe_time"
             tools:text="5h 30min" />
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/favorite"
+            style="@style/Widget.AppTheme.Favorite"
+            android:paddingStart="@dimen/icon_button_padding_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_favorite_24"
-            android:background="@color/black"
-            android:layout_gravity="bottom"/>
+            android:checkable="true"
+            android:layout_gravity="bottom"
+            tools:ignore="RtlSymmetry" />
 
 
     </FrameLayout>

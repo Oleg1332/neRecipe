@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.netology.nerecipes.R
+import ru.netology.nerecipes.adapter.showCategories
 import ru.netology.nerecipes.data.Category
 import ru.netology.nerecipes.data.Recipe
 import ru.netology.nerecipes.data.RecipeRepository
@@ -33,9 +34,10 @@ class RecipeCreationFragment : Fragment() {
         if (thisRecipe != null) {
             with(binding) {
                 categoryRecipeCheckbox.check(R.id.checkboxAs)
-                categoryRecipeCheckbox.check(R.id.checkboxEu)
-                categoryRecipeCheckbox.check(R.id.checkboxNa)
-                categoryRecipeCheckbox.check(R.id.checkboxRu)
+                checkboxEu.text = checkboxEu.context.showCategories(Category.European)
+                checkboxAs.text = checkboxAs.context.showCategories(Category.Asian)
+                checkboxNa.text = checkboxNa.context.showCategories(Category.American)
+                checkboxRu.text = checkboxRu.context.showCategories(Category.Russian)
                 recipeName.setText(thisRecipe.name)
                 recipeEnterField.setText(thisRecipe.recipe)
                 txtRecipeDescriptionInput.setText(thisRecipe.description)
@@ -72,8 +74,8 @@ class RecipeCreationFragment : Fragment() {
             category = getCategory(binding.categoryRecipeCheckbox.checkedRadioButtonId),
             author = "Me"
         )
-    recipeCreationViewModel.onCancelClicked(currentRecipe)
-    findNavController().navigateUp()
+        recipeCreationViewModel.onCancelClicked(currentRecipe)
+        findNavController().navigateUp()
     }
 
     fun getCategory(checkedId: Int) = when (checkedId) {
@@ -98,8 +100,8 @@ class RecipeCreationFragment : Fragment() {
             val resultBundle = Bundle(1)
             resultBundle.putParcelable(RESULT_KEY, currentRecipe)
             setFragmentResult(REQUEST_KEY, resultBundle)
-        } else return
-        findNavController().popBackStack()
+            findNavController().popBackStack()
+        }
     }
 
     private fun emptyFieldsCheck(recipe: Recipe): Boolean {
@@ -110,9 +112,7 @@ class RecipeCreationFragment : Fragment() {
         ) {
             Toast.makeText(activity, "Заполните все поля", Toast.LENGTH_LONG).show()
             false
-        } else {
-            true
-        }
+        } else true
     }
 
 
